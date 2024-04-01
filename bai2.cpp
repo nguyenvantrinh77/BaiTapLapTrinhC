@@ -1,33 +1,51 @@
-﻿#include <stdio.h>
+#include <stdio.h>
 #include <math.h>
-#include <stdlib.h>
-#include <time.h>
 
-// Hàm kiểm tra xem một số có phải là số chính phương hay không
-int isPerfectSquare(int num) {
-	int sqrt_num = sqrt(num);
-	return sqrt_num * sqrt_num == num;
+int kiemTraSCP(int n);
+int demSCP(int n);
+void soChinhPhuong(int n);
+
+int main(void)
+{
+	int n;
+	printf("Nhap so nguyen duong n: ");
+	scanf("%d", &n);
+
+	int soCP = demSCP(n);
+	printf("\nSo luong so chinh phuong nho hon %d la: %d\n", n, soCP);
+
+	soChinhPhuong(n);
+	return 0;
 }
 
-// Hàm đếm và in ra các số chính phương nhỏ hơn n
-void countAndPrintPerfectSquares(int n) {
-	printf("Cac so chinh phuong nho hon %d la:\n", n);
-	for (int i = 1; i < n; ++i) {
-		if (isPerfectSquare(i)) {
-			printf("%d ", i);
+void soChinhPhuong(int n)
+{
+	printf("Cac so chinh phuong nho hon %d la: ", n);
+	for (int i = 1; i < n; i++)
+	{
+		if (kiemTraSCP(i))
+		{
+			printf("%d, ", i);
 		}
 	}
 }
 
-int main() {
-	int n;
-	srand(time(NULL)); // Khởi tạo seed cho hàm random
-	n = rand() % 100 + 1; // Tạo số nguyên dương ngẫu nhiên từ 1 đến 100
 
-	printf("So nguyen duong n duoc tao ngau nhien la: %d\n", n);
+int kiemTraSCP(int n)
+{
+	int cbh = sqrt(n);
+	return cbh * cbh == n;
+}
 
-	// Gọi hàm để đếm và in ra các số chính phương nhỏ hơn n
-	countAndPrintPerfectSquares(n);
-
-	return 0;
+int demSCP(int n)
+{
+	int dem = 0;
+	for (int i = 1; i <= n; i++)
+	{
+		if (kiemTraSCP(i))
+		{
+			dem++;
+		}
+	}
+	return dem;
 }
